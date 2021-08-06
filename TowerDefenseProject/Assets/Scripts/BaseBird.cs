@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEnemy : EnemyEntity
+public class BaseBird : FlyableEntity
 {
     [Header("Stats")]
     [SerializeField] private int _health;
@@ -8,12 +10,12 @@ public class BaseEnemy : EnemyEntity
 
     protected override void InitBehaviours()
     {
-        _movable = new StandartMoveBehaviour(this.transform);
+        _movable = new FlyingMoveBehaviour(this.transform);
     }
 
     private void Start()
     {
-        InitBehaviours();
+        InitBehaviours();    
     }
 
     private void Update()
