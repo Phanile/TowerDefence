@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseBird : FlyableEntity
@@ -15,7 +13,7 @@ public class BaseBird : FlyableEntity
 
     private void Start()
     {
-        InitBehaviours();    
+        InitBehaviours();
     }
 
     private void Update()

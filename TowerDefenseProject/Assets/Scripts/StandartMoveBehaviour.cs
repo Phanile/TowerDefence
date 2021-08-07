@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StandartMoveBehaviour : IMovable
+public class StandartMoveBehaviour : IMovable, IRotatable
 {
     private Transform _enemyEntity;
 
@@ -11,7 +11,7 @@ public class StandartMoveBehaviour : IMovable
     public StandartMoveBehaviour(Transform enemyEntity)
     {
         _enemyEntity = enemyEntity;
-        _allPoints = GameBoard.wayPoints;
+        _allPoints = GameBoard.WayPoints;
         _index = 1;
     }
 
@@ -26,5 +26,13 @@ public class StandartMoveBehaviour : IMovable
             }
             _index++;
         }
+    }
+
+    public void Rotate(float rotateSpeed)
+    {
+        var lookPos = _allPoints[_index].position - _enemyEntity.position;
+        lookPos.y = 0;
+        var rotation = Quaternion.LookRotation(lookPos);
+        _enemyEntity.rotation = Quaternion.Slerp(_enemyEntity.rotation, rotation, Time.deltaTime * rotateSpeed);
     }
 }

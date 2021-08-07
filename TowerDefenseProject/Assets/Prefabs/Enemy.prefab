@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6454150240764599810}
   - component: {fileID: 3658634343663067880}
   - component: {fileID: 4341801899727184702}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 78192d7639fe8264bb4682af7c9392b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,3 +111,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 10
   _moveSpeed: 10
+  _rotateSpeed: 15

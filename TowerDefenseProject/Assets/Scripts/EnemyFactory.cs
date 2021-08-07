@@ -13,7 +13,7 @@ public class EnemyFactory : MonoBehaviour
     {
         for(int i = 0; i < enemyEntities.Length; i++)
         {
-            Instantiate(enemyEntities[i], GameBoard.enemiesRoot);
+            Instantiate(enemyEntities[i], GameBoard.EnemiesRoot);
             yield return new WaitForSeconds(_delay);
         }
     }

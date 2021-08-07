@@ -11,7 +11,7 @@ public class FlyingMoveBehaviour : IMovable
     public FlyingMoveBehaviour(Transform enemyEntity)
     {
         _enemyEntity = enemyEntity;
-        _allPoints = GameBoard.wayPoints;
+        _allPoints = GameBoard.WayPoints;
         _index = _allPoints.Length - 1;
     }
 
