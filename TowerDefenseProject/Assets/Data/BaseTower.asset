@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BaseTower
   m_EditorClassIdentifier: 
   type: 0
+  rotationSpeed: 120
   damage: 0
   range: 25
   attackDelay: 0

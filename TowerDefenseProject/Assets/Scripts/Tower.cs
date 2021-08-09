@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 public class Tower : Building
@@ -7,7 +6,28 @@ public class Tower : Building
     [SerializeField] private TowerData _data;
 
     [Header("Target")]
-    [SerializeField] private EnemyEntity _target;
+    [SerializeField] private Transform _target;
+
+    [Header("RotatableObjects")]
+    [SerializeField] private Transform _muzzle;
+    [SerializeField] private Transform _turret;
+
+    private void Start()
+    {
+        InitBehaviours();
+    }
+
+    protected override void InitBehaviours()
+    {
+        if (_data.type == TowerType.Air)
+        {
+            _rotatable = new AirTowerRotationBehaviour(_turret, _muzzle);
+        }
+        else
+        {
+            _rotatable = new TowerRotationBehaviour(_turret);
+        }
+    }
 
     private void Update()
     {
@@ -15,7 +35,7 @@ public class Tower : Building
         {
             if (FindEnemy() != null)
             {
-                _target = FindEnemy().GetComponent<EnemyEntity>();
+                _target = FindEnemy();
             }
         }
         if (FindEnemy() == null)
@@ -25,9 +45,13 @@ public class Tower : Building
                 _target = null;
             }
         }
+        if (_target != null)
+        {
+            _rotatable.Rotate(_data.rotationSpeed, _target);
+        }
     }
 
-    private Collider FindEnemy()
+    private Transform FindEnemy()
     {
         Collider[] enemies = Physics.OverlapSphere(transform.position, _data.range, GameLayers.EnemyMask);
 
@@ -36,13 +60,13 @@ public class Tower : Building
             switch (_data.type)
             {
                 case TowerType.Both:
-                    return enemies[0];
+                    return enemies[0].GetComponent<Transform>();
                 case TowerType.Ground:
                     foreach (var enemy in enemies)
                     {
                         if (enemy.GetComponent<EnemyEntity>() is FlyableEntity == false)
                         {
-                            return enemy;
+                            return enemy.GetComponent<Transform>();
                         }
                     }
                     break;
@@ -51,7 +75,7 @@ public class Tower : Building
                     {
                         if (enemy.GetComponent<EnemyEntity>() is FlyableEntity)
                         {
-                            return enemy;
+                            return enemy.GetComponent<Transform>();
                         }
                     }
                     break;
@@ -65,4 +89,5 @@ public class Tower : Building
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position, _data.range);
     }
+
 }
